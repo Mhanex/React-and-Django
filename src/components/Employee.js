@@ -1,6 +1,4 @@
-import UpdateEmployee from "./UpdateEmployee";
-
-const Employee = (props) => {
+function Employee (props) {
 
     return (
         <div className="min-w-[350px] max-w-[350px] m-2 py-8 px-8 max-w-sm bg-white rounded-xl shadow-lg space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6">
@@ -19,12 +17,7 @@ const Employee = (props) => {
                         {props.role}
                     </p>
                 </div>
-                <UpdateEmployee 
-                    id={props.id}
-                    name={props.name} 
-                    role={props.role} 
-                    editEmployee={props.editEmployee}
-                    />
+                 {props.editEmployee}
             </div>
         </div>
      );

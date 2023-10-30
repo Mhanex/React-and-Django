@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 
-function UpdateEmployee(props) {
+function EditEmployee(props) {
   const [name, setName] = useState(props.name);
   const [role, setRole] = useState(props.role);
 
@@ -16,7 +16,7 @@ function UpdateEmployee(props) {
         onClick={handleShow} 
         className="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
       >
-        UPDATE
+        EDIT
       </button>
 
       <Modal
@@ -29,11 +29,11 @@ function UpdateEmployee(props) {
           <Modal.Title>Update Employee</Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>
+        <Modal.Body> 
         <form 
             onSubmit={(e) => {
                 e.preventDefault();
-                props.editEmployee(props.id, name, role);
+                props.updateEmployee(props.id, name, role);
                 handleClose();
             }}
             id="editmodal" 
@@ -100,4 +100,4 @@ function UpdateEmployee(props) {
   );
 }
 
-export default UpdateEmployee;
+export default EditEmployee;

@@ -10,7 +10,8 @@ export default function Definition () {
 
 
     useEffect(() => {
-        fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + search)
+       const url = 'https://api.dictionaryapi.dev/api/v2/entries/en/' + search;
+        fetch(url)
             .then((response) => {
                 if (response.status === 404) {
                     setNotFound(true);
@@ -21,8 +22,8 @@ export default function Definition () {
                 setWord(data[0].meanings);
                 // console.log(data[0].meanings);
             })
-            .catch(error => {
-                console.error('Error:', error);
+            .catch((error) => {
+                console.log(error.message);
             });
     }, []);
 

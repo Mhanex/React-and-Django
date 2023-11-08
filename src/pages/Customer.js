@@ -1,12 +1,15 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Notfound from './Notfound';
 import { baseUrl } from '../shared';
+import axios from 'axios';
 
 export default function Customer () {
     const [customer, setCustomer] = useState();
     const [notFound, setNotFound] = useState(false);
     const { id } = useParams();
+    const navigate = useNavigate();
+
     useEffect(() => {
         const url = baseUrl + 'api/customers/' + id;
         fetch(url)
@@ -17,7 +20,7 @@ export default function Customer () {
                 return response.json();
             })
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 setCustomer(data.customer);
             })
             .catch((error) => {
@@ -39,6 +42,25 @@ export default function Customer () {
                     <p>{customer.occupation}</p>
                 </div>
             ): null}
+            <button 
+                onClick={() =>{
+                    const url = baseUrl + 'api/customers/' + id;
+                    fetch(url, {method: 'DELETE', headers: {'content-Type': 'application/json'}})
+                        .then((response) => {
+                            if (!response.ok){
+                                throw new Error('Swomething went wrong');
+                            }
+                            navigate('/customers');
+                        })
+                        .catch((e) =>{
+                            console.log(e);
+                        })
+                }}
+                className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-1 px-2 rounded"
+            >
+                Delete
+            </button>
+            <br />
             <Link to="/customers">Go Back</Link>
         </>
     );

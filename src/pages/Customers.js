@@ -8,7 +8,7 @@ export default function Customers() {
    
 
     useEffect(() => {
-         const url = baseUrl + 'customers';
+         const url = baseUrl + 'api/customers';
         fetch(url)
             .then((response) => {
                 return response.json();
@@ -23,22 +23,23 @@ export default function Customers() {
     return (
         <>
             <h3>Cusotmers</h3>
-            {customers ?
-                customers.map((customer) => {
-                    return (
-                        <ul>
-                            <li>
-                                <Link 
-                                    style={{textDecoration: "none"}} 
-                                    to={"/customer/" + customer.id}
-                                >
-                                    {customer.name}
-                                </Link>
-                            </li>
-                        </ul>
-                    );
-                })
-            : null }
+            <ul>
+                {customers ?
+                    customers.map((customer) => {
+                
+                        return (
+                            <li key={customer.id}>
+                                    <Link 
+                                        style={{textDecoration: "none"}} 
+                                        to={"/customer/" + customer.id}
+                                    >
+                                        {customer.name}
+                                    </Link>
+                                </li>
+                        );
+                    })
+                : null }
+            </ul>
         </>
          
     );

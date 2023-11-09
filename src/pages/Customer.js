@@ -2,11 +2,14 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Notfound from './Notfound';
 import { baseUrl } from '../shared';
-import axios from 'axios';
+
 
 export default function Customer () {
     const [customer, setCustomer] = useState();
     const [notFound, setNotFound] = useState(false);
+    const [editMode, setEditMode] = useState(false); // Step 1: Edit Mode State
+    const [formData, setFormData] = useState({}); // Step 4: Form Data
+
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -22,6 +25,8 @@ export default function Customer () {
             .then((data) => {
                 // console.log(data);
                 setCustomer(data.customer);
+                // Step 4: Initialize formData with customer data
+                setFormData(data.customer);
             })
             .catch((error) => {
                 console.error('Error fetching data:', error);
@@ -32,6 +37,7 @@ export default function Customer () {
 
     return (
         <>  
+        
             
             <h4>Single Customer Details</h4>
             {notFound ? <p>The customer with id {id} does not exist!</p> :  null}
@@ -42,6 +48,28 @@ export default function Customer () {
                     <p>{customer.occupation}</p>
                 </div>
             ): null}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <button 
                 onClick={() =>{
                     const url = baseUrl + 'api/customers/' + id;
